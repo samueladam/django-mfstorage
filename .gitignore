@@ -1,0 +1,15 @@
+*.pyc
+*.pyo
+*-log.txt
+*.sqlite3
+.installed.cfg
+bin
+develop-eggs
+dist
+downloads
+eggs
+parts
+build
+bootstrap.py
+src/django
+*.egg-info
