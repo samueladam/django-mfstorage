@@ -25,8 +25,9 @@ class MultiFolderStorageTest(unittest.TestCase):
             path = self.storage.save('data.txt', content)
             
             # open and test file
-            f = self.storage.open(path)
-            self.assertEqual(f.read(), text)
+            f_data = self.storage.open(path).read()
+            self.assertEqual(f_data, text)
+            self.assertEqual(len(f_data), size)
 
         # verify that file are saved under 3 sub dirs
         dir, file = os.path.split(path)
