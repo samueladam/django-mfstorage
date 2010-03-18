@@ -22,11 +22,10 @@ class MultiFolderStorage(FileSystemStorage):
 
     """
     def save(self, name, content):
-        # create md5 hash from filename and content
-        data = ''
-        if content.size:
-            data = content.chunks(chunk_size=500).next()
-        hash = md5(name + data).hexdigest()
+        # create md5 hash from content
+        data = content.size and content.chunks(chunk_size=1024).next()\
+                            or 'empty_file'
+        hash = md5(data).hexdigest()
 
         # generate the new sub path
         dir_name, file_name = os.path.split(name)

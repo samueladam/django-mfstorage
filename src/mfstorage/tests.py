@@ -18,16 +18,15 @@ class MultiFolderStorageTest(unittest.TestCase):
         shutil.rmtree(self.temp_dir)
 
     def test_storage(self):
-        for size in (0, 1, 10, 5000):
+        for size in (0, 1, 1000, 5000, 100000):
             # write file
             text = 'X' * size
             content = ContentFile(text)
             path = self.storage.save('data.txt', content)
             
             # open and test file
-            f_data = self.storage.open(path).read()
-            self.assertEqual(f_data, text)
-            self.assertEqual(len(f_data), size)
+            f = self.storage.open(path)
+            self.assertEqual(f.read(), text)
 
         # verify that file are saved under 3 sub dirs
         dir, file = os.path.split(path)
